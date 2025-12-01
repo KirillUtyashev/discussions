@@ -5,7 +5,7 @@
 </p>
 
 **Discussions.ru** is a structured Q&A and communication platform built for online schools in the Commonwealth of Independent States (CIS).  
-It has been successfully integrated into **Obrazavr.ru**, where it currently supports over **600,000 active users**.
+It has been successfully integrated into **[Obrazavr.ru](https://obrazavr.ru/)**, where it currently supports over **600,000 active users**.
 
 The platform provides an organized, searchable environment for students and instructors, serving as a scalable alternative to unstructured messenger-based communication.
 
