@@ -1,0 +1,20 @@
+<div class="answer post" data-id="" id="answer_template">
+    {% include "discussionboard/components/author.html" %}
+    <div class="mt flex gap_15">
+        <div>
+            {% include "discussionboard/components/like.html" %}
+            <div class="answer_endorsed alc jc hide mt" data-show="is_endorsed">
+                <div class="jc">
+                    {% include "discussionboard/components/icons/endorse.html" %}
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="answer_body post_body" data-html="body">
+
+            </div>
+            {% include "discussionboard/components/bottom_actions.html" %}
+            <div class="comments"></div>
+        </div>
+    </div>
+</div>

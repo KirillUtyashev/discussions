@@ -1,0 +1,62 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %}Тарифы | {{ sitename }}{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/pricing.css' %}">{% endblock %}
+
+{% block content %}
+{% include "users/home_nav.html" %}
+
+<div class="container height_100 ptb">
+    <h1 class="text-center">Тарифы</h1>
+    <div class="mtb row jc wrap gap prices">
+        <div class="price_box">
+            <div class="price">
+                <h3>Бесплатно</h3>
+            </div>
+            <div class="mt">
+                До 30 студентов во всех курсах
+            </div>
+        </div>
+
+        {% for plan in plans %}
+        <div class="price_box">
+            <div class="plan_name">
+                {{ plan.name }}
+            </div>
+            <div class="price">
+                <h3>{{ plan.price_rubles }}</h3>
+                <div class="sec">/ месяц</div>
+            </div>
+            <div class="mt">
+                До {{ plan.number_of_unique_students_allowed }} студентов во всех курсах
+            </div>
+            <div class="mt">
+                {{ plan.for_whom }}
+            </div>
+            <div class="spacer"></div>
+            <div class="mt">
+                <a class="btn big" href="/checkout/?plan={{ forloop.counter }}">Выбрать</a>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="price_box">
+            <h3>Договорная</h3>
+            <div class="mt">
+                Если нужно больше студентов
+            </div>
+            <div class="spacer"></div>
+            <div class="mt">
+                <a class="btn" href="/contact/">Связаться с нами</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt sec">
+
+    </div>
+</div>
+
+{% include "users/footer.html" %}
+{% endblock %}

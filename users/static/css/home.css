@@ -1,0 +1,152 @@
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+.hero_img img {
+    width: 100%;
+    border-radius: var(--big_radius);
+}
+
+.bg {
+    background-color: var(--background);
+}
+
+.bg2 {
+    background-color: var(--background2);
+}
+
+
+p {
+    line-height: 1.6em;
+    font-size: 17px;
+}
+
+section {
+    padding: 96px 0;
+}
+
+.how_it_works .text {
+    max-width: 450px;
+}
+
+.big_gap {
+    gap: 24px;
+}
+
+
+.how_it_works img {
+    width: 40%;
+    max-width: 330px;
+}
+
+.used_by img {
+    max-height: 50px;
+    min-height: 50px;
+    width: auto;
+}
+
+.used_by img.uoft {
+    max-height: 60px;
+    min-height: 60px;
+}
+
+.used_by img.small {
+    max-height: 35px;
+    min-height: 35px;
+}
+
+.used_by {
+    gap: 50px;
+}
+
+.why_us {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin: 0 auto;
+    border-bottom: var(--border);
+    padding: 20px 0;
+    max-width: 1000px;
+}
+
+.why_us:last-of-type {
+    border-bottom: 0;
+}
+
+.why_us div {
+    min-width: calc(50% - 20px);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.student_or_teacher div {
+    padding: 15px 24px;
+    border-radius: 50vh 0px 0px 50vh;
+    border: var(--border);
+    border-width: 2px 1px 2px 2px;
+    width: 100%;
+    max-width: 190px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.student_or_teacher div.active {
+    background-color: var(--background2);
+}
+
+.student_or_teacher div:last-child {
+    border-radius:  0px 50vh 50vh 0px;
+    border-width: 2px 2px 2px 1px;
+}
+
+.communication .text {
+    max-width: 400px;
+}
+
+.communication img {
+    border-radius: var(--big_radius);
+    max-width: 100%;
+}
+
+.instr_text {
+    width: 400px;
+    max-width: 100%;
+}
+
+.instr_img {
+    width: 300px;
+    max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .big_text {
+        font-size: 19px;
+    }
+    .med_text {
+        font-size: 18px;
+    }
+    .big_gap {
+        gap: 40px;
+    }
+    h2 {
+        font-size: 40px;
+    }
+    .hero_img {
+        max-width: 45%;
+    }
+}
+
+@media (min-width: 1191px) {
+    .big_text {
+        font-size: 21px;
+    }
+}

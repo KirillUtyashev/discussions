@@ -1,0 +1,9 @@
+.content {
+    max-width: 700px;
+    margin: auto;
+    font-size: 17px;
+}
+
+.content ul {
+    padding-left: 24px;
+}

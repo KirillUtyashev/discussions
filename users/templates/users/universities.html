@@ -1,0 +1,24 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %}Для ВУЗов | {{ sitename }}{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">{% endblock %}
+
+{% block content %}
+{% include "users/home_nav.html" %}
+
+<div class="container height_100 ptb">
+    <div class="content">
+    <h1>Дискусии для ВУЗов</h1>
+    <p class="mt">Мы предлагаем индивидуальные условия сотрудничества и расширенную техническую поддержку для университетов, онлайн-школ и курсов с большим числом студентов.</p>
+
+    <p class="mt">Пожалуйста, свяжитесь с нами для бесплатной консультации:</p>
+    <ul class="mt-15">
+        <li>Телеграм (самый быстрый) <a href="https://t.me/discussions_support">@discussions_support</a></li>
+        <li>Электронная почта <a href="mailto:contact@discussions.ru">contact@discussions.ru</a></li>
+    </ul>
+</div>
+</div>
+
+{% include "users/footer.html" %}
+{% endblock %}

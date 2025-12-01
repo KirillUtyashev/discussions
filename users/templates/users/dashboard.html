@@ -1,0 +1,110 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% load userstags %}
+{% block title %}Мои курсы | Дилемма{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">{% endblock %}
+
+{% block content %}
+
+{% include "users/user_nav.html" %}
+
+<div class="container mtb">
+    <h1>Курсы</h1>
+
+    <div class="mtb">
+        {% if courses %}
+        <div class="courses flex gap wrap">
+            {% for course in courses %}
+            {% is_admin course as is_admin %}
+            <div class="course">
+                <h3>{{ course.name }}</h3>
+                <div class="mt alc wrap gap_15">
+                    <a class="btn" href="{{ course.get_absolute_url }}">
+                        Перейти
+                    </a>
+                    {% if is_admin == '1' %}
+                        <a class="btn secondary" href="{{ course.get_settings_url }}">
+                            Настройки
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center">
+            <img src="{% static 'img/sleep.svg' %}" width="200">
+            <p class="mt-15">Курсов пока нет. Создайте свое обсуждение или вступите по коду.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="alc gap wrap mtb mb">
+        <button class="btn open_modal" data-target="join_course">Вступить в курс по коду</button>
+        <button class="btn open_modal secondary" data-target="create_course">Создать обсуждение</button>
+    </div>
+
+    {% if student_count %}
+        <div class="tarif mb">
+            <div class="bar">
+                <span id="tarif_bar" style="width: 0"></span>
+            </div>
+            <div class="mt">Студентов в курсах: <span class="bold accent" id="student_count">{{ student_count }}</span></div>
+            <div class="mt-15">Максимальное число студентов по тарифу: <span class="bold accent" id="max_student_count">{{ max_students_allowed }}</span></div>
+            <a href="/checkout/" class="btn mt">Увеличить лимит</a>
+        </div>
+    {% endif %}
+</div>
+
+<div class="modal" id="join_course">
+    <div class="modal-content">
+        <div class="modal_header">
+            <h3>Вступить в курс</h3>
+        </div>
+        <div class="sec mt">
+            Введите код курса, полученный от преподавателя.
+        </div>
+
+        <div class="mt">
+            <div>Код курса</div>
+            <div class="mt-15">
+                <input type="text" placeholder="ABC123" id="code" maxlength="10">
+            </div>
+            <div class="hide" id="need_password">
+                <div class="mt-15">
+                    Пароль
+                </div>
+                <div class="mt-15">
+                    <input type="password" id="course_password">
+                </div>
+            </div>
+            <button class="btn mt big" id="join" disabled>Вступить</button>
+            <div class="error red mt" id="join_error" hidden></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="create_course">
+    <div class="modal-content">
+        <div class="modal_header">
+            <h3>Создать курс</h3>
+        </div>
+        <div class="mt">
+            <div>Название курса</div>
+            <div class="mt-15">
+                <input type="text" placeholder="" id="name">
+            </div>
+            <button class="btn mt big" id="create" disabled>Создать</button>
+            <div class="error red mt" id="create_error" hidden></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{% static 'js/dashboard.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /wp-json/
+Disallow: /?rest_route=
+
+Sitemap: https://discussions.ru/sitemap.xml
+
+User-agent: Yandex
+Clean-param: returnurl /login
+Clean-param: returnurl /register

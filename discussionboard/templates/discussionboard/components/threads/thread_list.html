@@ -1,0 +1,74 @@
+{% load static %}
+{% load discussiontags %}
+<li data-id="{{ thread.id }}"
+    data-category="{{ thread.category.id }}"
+    data-q-id="{{ thread.question.id }}"
+    class="thread_list"
+    data-type="{{ thread.type }}">
+
+    <div class="sb">
+        <div class="alc gap_10">
+            <div class="post_icon alc">
+                <img src="{% static 'img/post.svg' %}">
+            </div>
+            <div class="question_icon alc">
+                <img src="{% static 'img/question.svg' %}">
+            </div>
+            <div class="q_title" data-text="title">{{ thread.title }}</div>
+        </div>
+        <div class="badges gap_15 alc">
+            <div class="answered alc {% if thread.is_answered %} {% else %} hide {%endif%}" data-show="is_answered">
+                {% include "discussionboard/components/icons/mark.html" %}
+            </div>
+
+            <div class="pinned_icon">
+                {% include "discussionboard/components/icons/pin.html" %}
+            </div>
+        </div>
+    </div>
+    <div class="sb mt-15 bottom_items">
+        <div class="alc small_gap bottom_first_group">
+            <div class="thread_cat cat" data-id="{{ thread.category.id }}">
+                {{ thread.category.tag }}
+            </div>
+
+            <div class="author" data-text="author_name">
+                {{ thread.question.author_name }}
+            </div>
+
+            <div class="time sec" data-text="time">
+                {{ thread.question.calculate_time }}
+            </div>
+        </div>
+
+        <div class="alc small_gap sec">
+            {% is_liked_by_user thread.question as is_liked_by_user %}
+            <div class="like gap_5 alc{% if is_liked_by_user %} active{% endif %}" data-active="is_liked_by_user">
+                <svg width="10" height="10" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+                    <g id="g1">
+                        <path id="main_path" fill="var(--lightgray)" stroke="var(--lightgray)" stroke-width="3"
+                            d="M 24.03125 3.757813 C 22.403341 3.757813 20.910839 4.273672 19.595293 5.291096 C 18.334064 6.266502 17.494356 7.508869 17 8.412266 C 16.505646 7.508808 15.665936 6.266502 14.404707 5.291096 C 13.089161 4.273672 11.596661 3.757813 9.96875 3.757813 C 5.425859 3.757813 2 7.473652 2 12.401211 C 2 17.724689 6.274004 21.366932 12.744278 26.880781 C 13.843027 27.817169 15.088438 28.878534 16.382891 30.010508 C 16.553516 30.159922 16.772655 30.242188 17 30.242188 C 17.227345 30.242188 17.446484 30.159922 17.617109 30.010567 C 18.91168 28.878418 20.157032 27.817108 21.256428 26.880196 C 27.725998 21.366932 32 17.724689 32 12.401211 C 32 7.473652 28.574142 3.757813 24.03125 3.757813 Z" />
+                    </g>
+                </svg>
+                <div class="likes_count" data-text="all_likes">
+                    {{ thread.question.count_all_likes }}
+                </div>
+            </div>
+
+            <div class="count_answers alc gap_5">
+                <svg width="10" height="10" x="0" y="0" viewBox="0 0 24 24" style="enable-background:new 0 0 512 512"
+                    xml:space="preserve" class="">
+                    <g>
+                        <path
+                            d="M12 1a10.995 10.995 0 0 0-9.464 16.6l-1.475 4.058A1 1 0 0 0 2 23a1.019 1.019 0 0 0 .342-.06L6.4 21.464A11 11 0 1 0 12 1z"
+                            data-name="Layer 2" fill="var(--lightgray)" opacity="1" data-original="#000000" class="">
+                        </path>
+                    </g>
+                </svg>
+                <div class="answers_count_thread" data-text="all_answers">
+                    {{ thread.count_all_answers }}
+                </div>
+            </div>
+        </div>
+    </div>
+</li>

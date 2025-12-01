@@ -1,0 +1,17 @@
+<div class="cat top_cat" data-id="{{category.id}}">
+    <span class="cat_name">{{ category.tag }}</span>
+    <div class="delete_cat open_modal" data-target="delete_category_modal">
+        {% include "discussionboard/components/icons/delete.html" %}
+    </div>
+</div>
+<div class="subcats" data-id="{{category.id}}">
+    <div class="subcats_list flex column">
+        {% for subcategory in category.subcategories.all %}
+            {% include "discussionboard/components/settings/subcategory.html" %}
+        {% endfor %}
+    </div>
+    <div>
+        <button class="btn mt-15 add_subcat_modal secondary open_modal"
+            data-target="add_subcat_modal">Добавить подкатегорию</button>
+    </div>
+</div>

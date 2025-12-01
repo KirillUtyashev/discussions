@@ -1,0 +1,83 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %}Оформление заказа | {{ sitename }}{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+
+{% endblock %}
+{% block content %}
+{% include "users/user_nav.html" %}
+
+<div class="container height_100 ptb">
+    <h1>Оформление заказа</h1>
+    <div class="plan_selection gap flex wrap mtb">
+        {% for plan_ in plans %}
+        <div class="price_box pointer {% if plan == plan_.name %}current_plan{% endif %}" data-plan="{{ plan_.tariff_type }}" data-price="{{ plan_.price_rubles }}">
+            <div class="plan_name">{{ plan_.name }}</div>
+            <div class="price jc">
+                <h3>{{ plan_.price_rubles }}</h3>
+                <div class="sec">/ месяц</div>
+            </div>
+            <div class="mt sec text-center">
+                {{ plan_.for_whom }}
+            </div>
+            <div class="mt text-center">
+                До {{ plan_.number_of_unique_students_allowed }} студентов
+            </div>
+            {% if plan_.price_to_pay %}
+                <div class="mt text-center">
+                    Первый месяц за
+                    {{ plan_.price_to_pay }}₽
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="choice mtb">
+        <label class="alc">
+            <input type="checkbox" class="mandatory">
+            <span class="check"></span>
+            <div>
+                <div>Согласие на <a target="_blank" href="/privacy/">обработку
+                        персональных данных</a></div>
+            </div>
+        </label>
+
+        <label class="alc mt">
+            <input type="checkbox" class="mandatory">
+            <span class="check"></span>
+            <div>
+                Согласие c условиями оферты рекуррентных
+                платежей
+            </div>
+        </label>
+    </div>
+
+    <button class="btn mt big" id="pay" disabled>Оплатить</button>
+
+    <div class="mtb mb">
+        <h2>Условия подписки</h2>
+        <div class="mt">
+            Ваша месячная подписка начнется сегодня и будет автоматически продлеваться за <span id="term_price"></span>, начиная с {{ expiration_date }}<span id="date"></span>.
+        </div>
+        <div class="mt">
+            <a href="/sub-terms/">Подробные условия подписки</a>
+        </div>
+
+        <div class="mt sec">
+            <div>ИП Мавлиев Марат Рафилович</div>
+            <div>ОГРНИП: 322028000169537</div>
+        </div>
+    </div>
+</div>
+
+{% include "users/footer.html" %}
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="{% static 'js/checkout.js' %}"></script>
+
+{% endblock %}

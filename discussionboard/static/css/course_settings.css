@@ -1,0 +1,66 @@
+@import url("settings.css");
+
+h2 {
+    font-size: 22px;
+}
+
+.users {
+    border: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.users .user_row {
+    padding: 10px 15px;
+}
+
+.header_row {
+    background-color: var(--background);
+}
+
+.users .user_row:not(:last-child) {
+    border-bottom: var(--border);
+}
+
+.users .name {
+    min-width: 30%;
+}
+
+.invite_link {
+    padding: 10px 15px;
+    border: var(--border);
+    border-radius: var(--radius);
+}
+
+.cat {
+    align-self: baseline;
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    background-color: var(--background2);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.categories .cat {
+    margin-top: 15px;
+}
+
+.subcats {
+    margin-left: 24px;
+}
+
+.delete_cat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.code {
+    padding: 10px;
+    border-radius: var(--radius);
+    background-color: var(--background2);
+    text-transform: uppercase;
+    font-weight: var(--main_bolder_weight);
+}

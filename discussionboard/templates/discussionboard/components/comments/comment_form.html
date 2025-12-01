@@ -1,0 +1,13 @@
+<div class="comment_form mt" id="comment_form_template">
+    <h4>Оставить комментарий</h4>
+    <div class="comment_editor mt">
+        <textarea class="comment_body"></textarea>
+    </div>
+
+    {% include "discussionboard/components/anonymous.html" %}
+
+    <div class="mt sb alc">
+        <span class="cancel_comment sec pointer">Отменить</span>
+        <button class="btn send_comment">Отправить</button>
+    </div>
+</div>

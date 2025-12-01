@@ -1,0 +1,48 @@
+@import url("components/modal.css");
+
+.course {
+    background-color: var(--background2);
+    padding: 24px;
+    border-radius: var(--big_radius);
+    min-width: 100%;
+}
+
+#code {
+    text-transform: uppercase;
+}
+
+.tarif {
+    margin-top: 100px;
+    max-width: 500px;
+}
+
+.bar {
+    position: relative;
+    background-color: var(--background2);
+    border-radius: 50vh;
+    height: 15px;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.bar span {
+    display: inline-block;
+    background-color: var(--accent);
+    height: inherit;
+    position: absolute;
+    width: 0;
+}
+
+@media (min-width: 560px) {
+    .course {
+        min-width: calc(50% - 12px);
+        max-width: calc(50% - 12px);
+    }
+}
+
+@media (min-width: 1200px) {
+    .course {
+        min-width: calc(33.3% - 16px);
+        max-width: calc(33.3% - 16px);
+    }
+}

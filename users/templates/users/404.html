@@ -1,0 +1,16 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %}Страница не найдена | {{ sitename }}{% endblock %}
+
+{% block content %}
+{% include "users/home_nav.html" %}
+
+<div class="container height_100 alc jc">
+    <div>
+        <h1 class="text-center">Страница не найдена</h1>
+        <div class="mt jc">
+            <a href="/" class="btn">Домой</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

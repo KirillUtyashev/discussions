@@ -1,0 +1,251 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %}{{ course.name }} | {{ sitename }}{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/course_settings.css' %}">
+{% endblock %}
+
+{% block content %}
+
+{% include "users/user_nav.html" %}
+
+<script>
+    course_url = "{{ course.get_absolute_url }}";
+</script>
+
+<div class="container height_100 main flex">
+    <div class="settings_menu">
+        <div class="menu_btn alc gap_15" data-section="general">
+            <div class="icon_wrapper jc alc">
+                {% include "users/icons/settings.html" %}
+            </div>
+            <span class="text">Общее</span>
+        </div>
+
+        <div class="menu_btn alc gap_15" data-section="discusssion">
+            <div class="icon_wrapper jc alc">
+                {% include "users/icons/discussions.html" %}
+            </div>
+            <span class="text">Обсуждение</span>
+        </div>
+
+
+        <div class="menu_btn alc gap_15" data-section="students">
+            <div class="icon_wrapper jc alc">
+                {% include "users/icons/profile.html" %}
+            </div>
+            <span class="text">Студенты</span>
+        </div>
+
+    </div>
+    <div class="content w-100">
+
+        <section data-section="general" class="active">
+            <h1 class="current_course_name">{{course.name}} – Настройки</h1>
+            <div class="mt">
+                <div>Название</div>
+                <div>
+                    <input type="text" class="mt-15" value="{{ course.name }}" id="course_name">
+                </div>
+
+                <div class="mt-15 hide" id="update_course_name_message"></div>
+
+                <button class="btn mt" id="update_course_name" disabled>Обновить</button>
+            </div>
+
+            <div class="mtb">
+                <h2>Способы входа</h2>
+                <div class="mt">
+                    <h3>1. Ссылка-приглашение</h3>
+                    <p class="sec mt-15">Отравьте ссылку студентам. Они зарегистрируют новый или подключат к классу уже
+                        существующий аккаунт.</p>
+                    <div class="choice mt">
+                        <label class="alc">
+                            <input type="checkbox" id="activate_link" {% if course.is_active_link %} checked{% endif %}>
+                            <span class="check"></span>
+                            <div>Активировать ссылку</div>
+                        </label>
+                    </div>
+                    <div class=" {% if not course.is_active_link %} hide{% endif %}" id="invite_link">
+                        <div class="mt invite_link">
+                            {{ invite_link }}
+                        </div>
+                        <button class="btn mt-15 copy_link">Скопировать</button>
+                    </div>
+                </div>
+                <div class="mtb">
+                    <h3>2. По коду курса</h3>
+                    <p class="sec mt-15">Отравьте студентам код курса и пароль.</p>
+
+                    <div class="mt alc gap_15">
+                        Код курса: <div class="code">{{course.code}}</div>
+                    </div>
+
+                    <div class="course_password mt">
+                        <div class="{% if course.password %} hide{% endif %}">
+                            <button class="btn" id="open_password">Установить пароль</button>
+                        </div>
+                        <div class="{% if not course.password %} hide{% endif %}" id="set_password">
+                            <div class="alc gap">
+                                <div>Пароль:</div>
+                                <input type="text" class="enter_password" id="course_password"
+                                    value="{{course.password}}">
+                            </div>
+                            <div class="hide mt-15" id="update_password_message"></div>
+                            <button class="btn mt" id="update_password" disabled>Установить пароль</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mtb">
+                <h2>Инструкторы</h2>
+                <p class="mt sec">Инструкторы могут закреплять, удалять, редактировать вопросы и ответы. Ответы от инструкторов показываются первыми со специальным оформлением.</p>
+
+                <div class="users mt" id="instructor_list">
+
+                    <div class="user_row header_row alc">
+                        <div class="name bold">Имя</div>
+                        <div class="email bold">Эл. почта</div>
+                    </div>
+                    {% for instructor in instructors %}
+                        {% include "discussionboard/components/settings/instructor.html" %}
+                    {% endfor %}
+                </div>
+
+                <button class="btn mt open_modal" data-target="add_instructor_modal">Добавить инструктора</button>
+
+                <div id="instructor_template" hidden>
+                    {% include "discussionboard/components/settings/instructor.html" %}
+                </div>
+            </div>
+
+        </section>
+
+        <section data-section="discusssion">
+            <h1>Категории</h1>
+            <div class="categories" id="main_cat_list">
+                    {% for category in categories %}
+                    <div class="flex column">
+                        {% include "discussionboard/components/settings/category.html" %}
+                    </div>
+                    {% endfor %}
+            </div>
+
+            <div class="flex column hide" id="cat_template">
+                {% include "discussionboard/components/settings/category.html" %}
+            </div>
+
+            <div id="subcat_template" hidden>
+                {% include "discussionboard/components/settings/subcategory.html" %}
+            </div>
+
+
+            <button class="btn mt open_modal" data-target="add_category_modal">Добавить категорию</button>
+        </section>
+
+        <section data-section="students">
+            <h1>Студенты</h1>
+
+            <div class="users mt">
+                <div class="user_row header_row alc">
+                    <div class="name bold">Имя</div>
+                    <div class="email bold">Эл. почта</div>
+                </div>
+                {% for student in students %}
+                <div class="user_row alc" data-id="{{ student.id }}">
+                    <div class="name">{{ student.name }}</div>
+                    <div class="email">{{ student.email }}</div>
+                    <div class="spacer"></div>
+                    <div class="red pointer delete_user">Удалить</div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</div>
+
+<div class="modal" id="add_instructor_modal">
+    <div class="modal-content">
+        <div class="modal_header">
+            <h3>Добавить инструктора</h3>
+        </div>
+
+        <div class="mt">
+            <div>Эл. почта инструктора</div>
+            <div class="mt-15">
+                <input type="email" id="instructor_email">
+            </div>
+        </div>
+
+        <div class="mt-15 hide" id="add_instructor_message"></div>
+        <button class="btn mt" id="add_instructor" disabled>Добавить инструктора</button>
+    </div>
+</div>
+
+<div class="modal" id="add_category_modal">
+    <div class="modal-content">
+        <div class="modal_header">
+            <h3>Добавить категорию</h3>
+        </div>
+
+        <div class="mt">
+            <div>Название категории</div>
+            <div class="mt-15">
+                <input type="text" id="cat_name">
+            </div>
+        </div>
+
+        <button class="btn mt" id="add_category" disabled>Добавить категорию</button>
+        <div class="mt-15 hide" id="add_category_message"></div>
+    </div>
+</div>
+
+<div class="modal" id="add_subcat_modal">
+    <div class="modal-content">
+        <div class="modal_header">
+            <h3>Добавить подкатегорию</h3>
+        </div>
+
+        <div class="mt alc gap_15">
+            <span>Основная категория:</span> <span class="cat" id="main_cat_name"></span>
+        </div>
+
+        <div class="mt">
+            <div>Название подкатегории</div>
+            <div class="mt-15">
+                <input type="text" id="subcat_name">
+            </div>
+        </div>
+
+        <div class="mt-15 hide" id="add_subcategory_message"></div>
+        <button class="btn mt" id="add_subcategory" disabled>Добавить категорию</button>
+    </div>
+</div>
+
+<div class="modal" id="delete_category_modal">
+    <div class="modal-content">
+        <div class="modal_header">
+            <h3>Удалить категорию</h3>
+        </div>
+
+        <div class="mt alc gap_15">
+            <span>Удаляемая категория:</span> <span class="cat" id="delete_cat_name"></span>
+        </div>
+
+        <div class="mt alc gap_15">
+            <span>Публикации перейдут в категорию:</span> <select id="new_cat"></select>
+        </div>
+
+        <button class="btn mt" id="delete_category">Удалить категорию</button>
+        <div class="mt-15 hide" id="delete_category_category_message"></div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{% static 'js/course_settings.js' %}"></script>
+
+{% endblock %}

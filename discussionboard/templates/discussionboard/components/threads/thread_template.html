@@ -1,0 +1,24 @@
+{% load static %}
+<div id="thread_template" class="thread_inner">
+
+    <div class="mobile mb">
+        <div class="alc">
+            <div class="pointer back_to_threads sec">Назад</div>
+        </div>
+    </div>
+
+    {% include "discussionboard/components/questions/question_template.html" %}
+
+    <div class="mtb2 no_post">
+        <h2 class="answers_count"></h2>
+        <div class="no_answers text-center">
+            <h2>Ответов пока нет</h2>
+            <img src="{% static 'img/sleep.svg' %}" width="150" class="mt">
+        </div>
+        <div class="answers">
+
+        </div>
+    </div>
+
+    {% include "discussionboard/components/answers/answer_form.html" %}
+</div>

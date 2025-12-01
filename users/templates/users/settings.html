@@ -1,0 +1,242 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% load userstags %}
+{% block title %}Настройки | Дилемма{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/settings.css' %}">{% endblock %}
+
+{% block content %}
+
+{% include "users/user_nav.html" %}
+
+<div class="height_100 container main flex">
+    <div class="settings_menu">
+        <div class="menu_btn alc gap_15" data-section="general">
+            <div class="icon_wrapper jc alc">
+                {% include "users/icons/profile.html" %}
+            </div>
+            <span class="text">Аккаунт</span>
+        </div>
+
+        <!-- <div class="menu_btn alc gap_15" data-section="notifications">
+            {% include "users/icons/notifications.html" %}
+            <span class="text">Уведомления</span>
+        </div> -->
+
+        <div class="menu_btn alc gap_15" data-section="payment">
+            {% include "users/icons/billing.html" %}
+            <span class="text">Тариф</span>
+        </div>
+
+
+        <div class="menu_btn alc gap_15" data-section="course">
+            <div class="icon_wrapper jc alc">
+                {% include "users/icons/discussions.html" %}
+            </div>
+            <span class="text">Курсы</span>
+        </div>
+
+    </div>
+    <div class="content w-100">
+
+        <section data-section="general" class="active">
+            <h1>Профиль</h1>
+
+            <div class="mt">
+                <div class="flex gap alc">
+                    <div class="avatar jc">
+                        <img src="/static/img/profile.svg" alt="Аватар">
+                    </div>
+                    <div>
+                        <h3 class="current_user_name">{{name}}</h3>
+                        <div class="mt-5 current_user_email">{{email}}</div>
+
+                    </div>
+                </div>
+                <button class="btn mt open_modal" data-target="change_profile">Изменить</button>
+            </div>
+            <div class="mtb">
+                <h2>Эл. почта</h2>
+                <div>
+                    <input type="text" class="mt-15" value="{{email}}" id="email">
+                </div>
+
+                <div class="mt-15 green" id="update_email_success"></div>
+                <div class="mt-15 red" id="update_email_error"></div>
+
+                <button class="btn mt-15" id="update_email" disabled>Обновить</button>
+
+                {% if not is_verified %}
+                <div class="flex">
+                    <div class="mtb red_box">
+                        <div class="red">Почта не подтверждена</div>
+                        <button class="btn mt-15" id="send_link">Отправить ссылку ещё раз</button>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="mtb">
+                <h2>Безопасность аккаунта</h2>
+                <button class="btn mt open_modal" data-target="password_modal">Сменить пароль</button>
+            </div>
+
+        </section>
+
+        <section data-section="notifications">
+            <h1>Уведомления</h1>
+        </section>
+
+        <section data-section="payment">
+            <h1>Тариф</h1>
+            <div class="mt">
+                <div class="bar">
+                    <span id="tarif_bar" style="width: 0"></span>
+                </div>
+                <div class="mt">Студентов в курсах: <span class="bold accent" id="student_count">{{ student_count }}</span></div>
+                <div class="mt-15">Максимальное число студентов по тарифу: <span class="bold accent" id="max_student_count">{{ max_students_allowed }}</span></div>
+                <a href="/checkout/" class="btn mt">Увеличить лимит</a>
+            </div>
+            {% if expiry_date  %}
+            <div class="mtb">
+                <h2>Автопродление</h2>
+                <div class="mt">
+                    Дата окончания подписки: {{ expiry_date }}
+                </div>
+                <div class="renewal_status" data-status="{% if renewal %}1{% else %}0{% endif %}">
+                    <div data-status="1">
+                        <button class="btn mt-15 secondary toggle_renewal red" data-id="0">Отменить подписку</button>
+                    </div>
+                    <div data-status="0">
+                        <button class="btn mt-15 toggle_renewal" id="turn_on_renewal" data-id="1">Включить
+                            автопродление</button>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </section>
+
+        <section data-section="course">
+            <h1>Мои курсы</h1>
+            <div class="mtb">
+                {% if courses %}
+                    <div class="courses">
+                        {% for course in courses %}
+                        {% is_admin course as is_admin %}
+                        <div class="course sb row gap alc" data-id="{{ course.id }}">
+                            <h3>{{ course.name }}</h3>
+                            <div class="alc gap">
+                                {% if is_admin == "0" %}
+                                <button class="btn red secondary unenroll open_modal" data-name="{{ course.name }}"
+                                    data-id="{{ course.id }}" data-target="delete_course_modal">Выйти</button>
+                                {% else %}
+                                <a class="btn secondary" href="{{ course.get_settings_url }}">
+                                    Настройки
+                                </a>
+                                {% endif %}
+                                <a class="btn" href="{{ course.get_absolute_url }}">
+                                    Перейти
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>Курсов пока нет.</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+
+</div>
+
+<div class="modal" id="change_profile">
+    <div class="modal-content">
+        <div class="modal_header">
+            <h3>Настройки профиля</h3>
+        </div>
+
+        <!-- <div class="mt">
+            <div>
+                <div>Аватар</div>
+                <label class="btn mt-15">
+                    Выбрать файл
+                    <input type="file" name="file" class="image_uploader hide" accept="image/*, image/heic">
+                </label>
+            </div>
+        </div> -->
+
+        <div class="mt">
+            <div>Имя</div>
+            <div class="mt-15">
+                <input type="text" id="name" value="{{name}}">
+            </div>
+        </div>
+
+        <div class="mt">
+            <button class="btn" id="update_profile" disabled>Обновить профиль</button>
+        </div>
+        <div class="mt-15 green" id="update_profile_success"></div>
+        <div class="mt-15 red" id="update_profile_error"></div>
+    </div>
+</div>
+
+<div class="modal" id="password_modal">
+    <div class="modal-content">
+        <div class="modal_header">
+            <h3>Сменить пароль</h3>
+        </div>
+
+        <div class="mt">
+            <div>Текущий пароль</div>
+            <div class="mt-15">
+                <input type="password" id="current_password">
+            </div>
+
+            <div class="mt">Новый пароль</div>
+            <div class="mt-15">
+                <input type="password" id="new_password">
+            </div>
+
+
+            <div class="mt">Введите новый пароль еще раз</div>
+            <div class="mt-15">
+                <input type="password" id="new_password_again">
+            </div>
+        </div>
+
+
+        <div class="mt-15 green" id="update_password_success"></div>
+        <div class="mt-15 red" id="update_password_error"></div>
+
+        <div class="mt">
+            <button class="btn" id="change_password" disabled>Сменить пароль</button>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="delete_course_modal">
+    <div class="modal-content">
+        <div class="modal_header">
+            <h3>Покинуть курс</h3>
+        </div>
+
+        <div class="mt sec">
+            Вы уверены, что хотите покинуть курс <span id="course_title"></span>?
+        </div>
+
+        <div class="mt">
+            <button class="btn secondary red" id="exit_course">Выйти из курса</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{% static 'js/settings.js' %}"></script>
+
+{% endblock %}

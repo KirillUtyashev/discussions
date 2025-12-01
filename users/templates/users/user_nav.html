@@ -1,0 +1,101 @@
+{% load static %}
+<nav class="user_nav">
+    <div class="nav_inner container alc sb w-100">
+        <div class="nav_mobile">
+            <div class="pointer alc column jc" id="menu_icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="alc gap">
+            <div>
+                <a href="/dashboard/"><span class="logo_text white">{{ sitename }}</span></a>
+            </div>
+        </div>
+        <div>
+            <div class="flex alc nav_desk">
+
+                <a class="course_url alc pointer nav_btn hide">
+                    <img src="{% static 'img/icons/message.svg' %}">
+                </a>
+
+                <a class="course_settings alc pointer nav_btn hide">
+                    {% include "users/icons/settings.html" %}
+                </a>
+
+                <a href="/dashboard/" class="{% if request.path == '/dashboard/' %} active {% endif %}nav_btn alc">
+                    {% include "users/icons/home.html" %}
+                </a>
+
+                <div id="notifications_btn" class="pointer alc nav_btn">
+                    {% include "users/icons/notifications.html" %}
+                    {% if unread_notifications %}
+                    <div class="unread">{{ unread_notifications }}</div>
+                    {% endif %}
+                </div>
+
+                <a href="/dashboard/" id="profile_btn" class="avatar jc" data-toast="profile_menu">
+                    <img src="{% static 'img/profile.svg' %}" alt="Аватар">
+                </a>
+
+                <div id="profile_menu" class="header_toast">
+                    <ul>
+                        <li>
+                            <div class="menu_el">
+                                <div class="flex gap alc">
+                                    <div class="avatar jc">
+                                        <img src="{% static 'img/profile.svg' %}" alt="Аватар">
+                                    </div>
+                                    <div>
+                                        <div class="nav_name current_user_name">{{name}}</div>
+                                        <div class="mt-5" class="current_user_email">{{email}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a class="bt menu_el" href="/settings/">Настройки</a></li>
+                        <!-- <li><a class="menu_el" href="/help/">Помощь</a></li> -->
+                        <li><a class="bt menu_el" href="/logout/">Выйти</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nav_mobile blanker"></div>
+        </div>
+    </div>
+</nav>
+
+<div id="full_menu" class="w-100">
+
+    <div class="flex gap jc mt alc">
+        <div class="avatar jc">
+            <img src="{% static 'img/profile.svg' %}" alt="Аватар">
+        </div>
+        <div>
+            <div class="nav_name current_user_name">{{name}}</div>
+            <div class="mt-5" class="current_user_email">{{email}}</div>
+        </div>
+    </div>
+
+    <a class="mob_nav_link bt mt alc gap_15" href="/dashboard/">
+        {% include "users/icons/home.html" %}
+        <span>Главная</span>
+    </a>
+    <a class="mob_nav_link settings_icon alc gap_15" href="/settings/">
+        <div class="icon_wrapper alc jc">
+            {% include "users/icons/settings.html" %}
+        </div>
+        <span>Настройки</span>
+    </a>
+    <!-- <a class="mob_nav_link alc gap_15" href="/settings/">
+        {% include "users/icons/notifications.html" %}
+        <span>Уведомления</span>
+    </a> -->
+    <a class="mob_nav_link alc gap_15" href="/logout/">
+        <span>Выйти</span>
+    </a>
+</div>
+
+<div id="notifications_menu">
+    
+</div>

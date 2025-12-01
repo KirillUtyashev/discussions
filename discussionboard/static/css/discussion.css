@@ -1,0 +1,403 @@
+@import url("left_menu.css");
+@import url("creation.css");
+@import url("search.css");
+@import url("components/modal.css");
+
+html,
+body {
+    overflow: unset;
+    overflow-x: unset;
+    overflow-y: unset;
+}
+
+.cat_bar,
+.threads_bar,
+.content {
+    flex: 1 1 auto;
+}
+
+.content {
+    display: none;
+}
+
+#main[data-view='create'] .content,
+#main[data-view='thread'] .content {
+    display: flex;
+}
+
+.thread_creation,
+.thread_content,
+.choose_thread {
+    display: none;
+}
+
+#main[data-view='create'] .thread_creation,
+#main[data-view='thread'] .thread_content {
+    display: block;
+}
+
+.instructor_badge {
+    font-weight: var(--main_bolder_weight);
+    font-size: 13px;
+    margin-left: 10px;
+    padding: 3px 7px;
+    border-radius: var(--radius);
+    background-color: var(--yellow);
+}
+
+.mobile_tablet {
+    display: none;
+}
+
+/* MIDDLE MENU */
+
+.threads_bar {
+    width: 100%;
+}
+
+.threads_bar .separator {
+    padding: 10px 15px;
+    background-color: var(--background2);
+    font-weight: var(--main_bolder_weight);
+}
+
+.section_name {
+    color: var(--secondary);
+    text-transform: uppercase;
+    font-weight: var(--header_weight);
+}
+
+.threads {
+    list-style: none;
+}
+
+.threads li {
+    border-bottom: var(--border_light);
+    padding: 15px;
+    cursor: pointer;
+}
+
+.threads li.active {
+    background-color: var(--transp_accent);
+}
+
+.answered svg{
+    height: 10px;
+    width: auto;
+}
+
+.pinned_icon {
+    display: none;
+}
+
+
+.pinned_threads .pinned_icon {
+    display: block;
+}
+
+.threads_bar .author {
+    max-width: 90px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.post_icon img,
+.question_icon img {
+    height: 20px;
+    width: auto;
+}
+
+li[data-type="post"] .question_icon,
+li[data-type="question"] .post_icon {
+    display: none !important;
+}
+
+.gap_10 {
+    gap: 10px;
+}
+
+
+/* SEE THREAD */
+
+.thread_inner {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.q_title {
+    font-size: 17px;
+}
+
+.bottom_items {
+    margin-top: 10px;
+}
+
+.bottom_items {
+    font-size: 14px;
+}
+
+li[data-type="post"] .count_answers {
+    display: none;
+}
+
+.small_gap {
+    gap: 7px;
+}
+
+.bottom_first_group {
+    gap: 9px;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+h2,
+h3 {
+    font-size: 23px;
+}
+
+.content {
+    padding: 24px 24px 35px 24px;
+}
+
+.thread_content .avatar {
+    min-width: 50px;
+    height: 50px;
+}
+
+.question .like,
+.answer .like {
+    min-width: 50px;
+    max-width: 50px;
+    flex-direction: column;
+    font-size: 17px;
+    font-weight: 450;
+    color: var(--secondary2);
+}
+
+.like.active {
+    color: var(--red);
+}
+
+.like.active #main_path {
+    fill: var(--red);
+    stroke: var(--red);
+}
+
+.answer {
+    margin-top: 30px;
+}
+
+.thread_content h2,
+h3 {
+    margin-top: 50px;
+}
+
+.instructor_only,
+.is_instructor .students_only {
+    display: none !important;
+}
+
+.is_instructor .instructor_only {
+    display: flex !important;
+}
+
+.load_more {
+    padding: 8px;
+    text-align: center;
+    color: var(--accent);
+    cursor: pointer;
+}
+
+/* COMMENT */
+
+.comment_form {
+    display: none;
+}
+
+.comment_opened .comment_form {
+    display: block;
+}
+
+.reply_text,
+.comment .comment_text {
+    display: none;
+}
+
+.comment .reply_text {
+    display: block;
+}
+
+.comment .comments {
+    margin-left: 15px;
+}
+
+.comment .like {
+    flex-direction: row;
+    gap: 5px;
+    min-width: 0;
+}
+
+.comment .like svg {
+    width: 15px;
+}
+
+/* q-actions */
+
+.q_action {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    align-items: center;
+}
+
+.q_action svg {
+    width: 25px;
+    height: 25px;
+}
+
+.q_action svg path {
+    fill: var(--lightgray) !important;
+}
+
+/* PIN */
+
+.active_text,
+.active .inactive_text {
+    display: none;
+}
+
+.active .active_text {
+    display: block;
+}
+
+.q_action.active .active_text {
+    color: var(--accent);
+}
+
+.q_action.active svg path {
+    fill: var(--accent) !important;
+}
+
+/* POST BODY */
+
+.post_body *:first-child {
+    margin-top: 0;
+}
+
+.post_body p {
+    margin: 15px 0;
+}
+
+.post_body ul,
+.post_body ol {
+    padding-left: 24px;
+}
+
+.post_body li {
+    margin: 10px 0;
+}
+
+.post_body img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ENDORSED */
+
+.answer_endorsed {
+    min-width: 50px;
+    max-width: 50px;
+}
+
+.answer_endorsed svg {
+    width: 27px;
+}
+
+.question_endorsed {
+    padding: 10px;
+    border-radius: 50vh;
+    flex-direction: row;
+    background-color: var(--transp_accent);
+    color: var(--accent);
+}
+
+.comment_endorsed svg {
+    width: 15px;
+}
+
+.tox-dialog__footer .tox-button[title="Сохранить"],
+.tox-control-wrap,
+.tox-dialog__body-content .tox-label {
+    display: none !important;
+} 
+
+.tox .tox-form__controls-h-stack {
+    justify-content: center;
+}
+
+@media (max-width: 769px) {
+    #main[data-view='create'] .threads_bar,
+    #main[data-view='thread'] .threads_bar {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .content {
+        display: flex;
+        padding: 35px 24px;
+    }
+
+    .threads_bar {
+        min-width: 350px;
+        max-width: 350px;
+        border-right: var(--border);
+    }
+
+    .threads_bar,
+    .content {
+        height: calc(100vh - var(--nav_height));
+        overflow-y: auto;
+    }
+
+    #main[data-view='idle'] .choose_thread {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 1179px) {
+    .main_container {
+        flex-direction: column;
+    }
+
+    .desk_only {
+        display: none !important;
+    }
+    .mobile_tablet {
+        display: block;
+    }
+}
+
+@media (min-width: 1180px) {
+    .threads_bar,
+    .content {
+        height: calc(100vh - var(--nav_height));
+        overflow-y: auto;
+    }
+
+    .content {
+        flex-grow: 1;
+        max-width: calc(100% - 350px);
+        overflow-x: auto;
+    }
+
+    .new_thread {
+        width: 100%;
+    }
+}

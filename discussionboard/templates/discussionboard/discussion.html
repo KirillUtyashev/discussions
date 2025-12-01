@@ -1,0 +1,175 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% load discussiontags %}
+{% load userstags %}
+{% block title %}{{ course.name }} | {{ sitename }} {% endblock %}
+{% block styles %}
+    {% is_admin course as is_admin %}
+<link rel="stylesheet" href="{% static 'css/discussion.css' %}">
+<link rel="stylesheet" href="{% static 'css/lib/prism.css' %}">
+<script>
+    is_instructor = {{ is_admin }}
+    course_settings_url = "{{course.get_settings_url}}"
+</script>
+{% endblock %}
+
+{% block content %}
+
+{% include "users/user_nav.html" %}
+
+<div class="main_container flex">
+    <div class="cat_bar">
+        <button class="btn new_thread desk_only">Новый вопрос</button>
+        <div class="section_name mt">Курсы </div>
+        <div class="courses mt-15">
+            {% for course2 in courses %}
+            <a class="course sb main pointer {% if course.name == course2.name %} active {% endif %}"
+                href="{{ course2.get_absolute_url }}">
+                {{ course2.name }}
+            </a>
+            {% endfor %}
+        </div>
+
+        <div class="section_name mt">Категории</div>
+
+        <div class="categories mt-10">
+            {% for category in categories %}
+                {% if is_admin == '1' %}
+                    Hello world
+                {% endif %}
+            <div class="cat top_cat sb pointer" data-id="{{ category.id }}">
+                <div class="alc">
+                    <div class="cat_square"></div>
+                    <span>{{ category.tag }}</span>
+                </div>
+                <span class="deselect_cat"></span>
+            </div>
+            <div class="subcats">
+                {% for subcategory in category.subcategories.all %}
+                <div class="cat sb subcat pointer" data-id="{{ subcategory.id }}" data-top-id="{{ category.id }}">
+                    <div class="alc">
+                        <div class="cat_square"></div>
+                        <span>{{ subcategory.tag }}</span>
+                    </div>
+                    <span class="deselect_cat"></span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="flex w-100" data-view="idle" id="main">
+
+        <div class="threads_bar">
+            <div class="sticky">
+                <div class="mobile_tablet">
+                    <div class="sb alc mobile_bar_wrap">
+                        <div class="open_cat_menu pointer alc column jc">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <button class="btn new_thread">Новый вопрос</button>
+                    </div>
+                </div>
+                <div class="search_bar alc gap_5">
+                    {% include "discussionboard/components/icons/search.html" %}
+                    <input type="text" placeholder="Поиск" id="search_field">
+                </div>
+            </div>
+            <div class="threads_list">
+                <div class="pinned_threads" {% if not pinned_threads.threads %} hidden {% endif %}>
+                    <div class="separator">Закрепленные</div>
+                    <ul class="threads pinned_threads_list">
+                        {% for thread in pinned_threads.threads %}
+                        {% include "discussionboard/components/threads/thread_list.html" %}
+                        {% endfor %}
+                    </ul>
+                    {% if pinned_threads.show_load_more %}
+                    <div class="load_more" data-list="pinned" data-cont=".pinned_threads_list">Показать еще</div>
+                    {% endif %}
+                </div>
+                <div class="regular_threads">
+                    <ul class="threads main_list">
+                        {% for thread in regular_threads.threads %}
+                            {% with week_end=thread.week_end %}
+                            {% if week_end %}
+                                <div class="separator">{{ week_end }}</div>
+                            {% endif %}
+                            {% endwith %}
+                        {% include "discussionboard/components/threads/thread_list.html" %}
+                        {% endfor %}
+                    </ul>
+                    {% if regular_threads.show_load_more %}
+                    <div class="load_more" data-list="regular" data-cont=".main_list">Показать еще</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <section class="choose_thread w-100">
+                <div>
+                    <img src="{% static 'img/sleep.svg' %}" width="150">
+                    <div class="mt-15">Выберите вопрос</div>
+                </div>
+            </section>
+
+            <section class="thread_content w-100">
+
+            </section>
+
+            {% include "discussionboard/components/questions/question_creation.html" %}
+
+        </div>
+    </div>
+</div>
+
+<div id="cat_menu_cover"></div>
+
+<div hidden>
+    {% include "discussionboard/components/threads/thread_template.html" %}
+    {% include "discussionboard/components/answers/answer_template.html" %}
+    <div id="thread_list_template">
+        {% include "discussionboard/components/threads/thread_list.html" %}
+    </div>
+    {% include "discussionboard/components/comments/comment_form.html" %}
+    {% include "discussionboard/components/comments/comment_template.html" %}
+</div>
+
+
+{% include "discussionboard/components/search/search_modal.html" %}
+
+{% endblock %}
+
+{% block scripts %}
+
+<!-- <script src="{% static 'js/math/mathjax.js' %}"></script> -->
+
+<script src="{% static 'js/math/config.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'js/math/mathjax/es5/tex-mml-chtml.js' %}" type="text/javascript" charset="utf-8"></script>
+
+
+<script src="{% static 'js/lib/prism.js' %}"></script>
+
+<script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+<script src="https://js.bytescale.com/sdk/v3"></script>
+
+<script src="{% static 'js/helpers.js' %}"></script>
+<script src="{% static 'js/form.js' %}"></script>
+<script src="{% static 'js/actions.js' %}"></script>
+
+<script src="{% static 'js/threads.js' %}"></script>
+<script src="{% static 'js/comments.js' %}"></script>
+<script src="{% static 'js/answers.js' %}"></script>
+
+<script src="{% static 'js/questions.js' %}"></script>
+
+<script src="{% static 'js/filters.js' %}"></script>
+<script src="{% static 'js/search.js' %}"></script>
+
+<script src="{% static 'js/discussion.js' %}"></script>
+
+{% endblock %}

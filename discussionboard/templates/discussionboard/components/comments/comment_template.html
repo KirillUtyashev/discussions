@@ -1,0 +1,22 @@
+<div class="comment post mt" data-id="" id="comment_template">
+    {% include "discussionboard/components/author.html" %}
+    <div class="mt">
+        <div>
+            <div class="comment_body post_body" data-html="body">
+
+            </div>
+            <div class="alc gap_15">
+                <div class="comment_endorsed alc jc hide mt" data-show="is_endorsed">
+                    <div class="alc">
+                        {% include "discussionboard/components/icons/endorse.html" %}
+                    </div>
+                </div>
+                <div class="mt">
+                    {% include "discussionboard/components/like.html" %}
+                </div>
+                {% include "discussionboard/components/bottom_actions.html" %}
+            </div>
+            <div class="comments"></div>
+        </div>
+    </div>
+</div>

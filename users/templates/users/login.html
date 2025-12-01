@@ -1,0 +1,65 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %}Войти | Дилемма{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="container height_100">
+    <div class="main_column">
+        <div class="login_logo">
+            {% include "users/components/logo.html" %}
+        </div>
+        <div class="form_cont">
+                <div id="main_form">
+                    <h1>Войти в аккаунт</h1>
+                    <form id="login_form" method="post"> {% csrf_token %}
+                        <label for="email" class="mt">Логин или эл. почта</label>
+                        <input type="text" name="email" id="email" autocomplete="username" maxlength="256">
+                        <span class="error"></span>
+
+                        <div class="sb mt-35">
+                            <label for="password">Пароль</label>
+                            <a class="accent pointer toggle-reset">Забыли пароль?</a>
+                        </div>
+
+                        <input type="password" name="password" id="password" autocomplete="current-password"
+                            maxlength="256">
+                        <span class="error"></span>
+                        <button type="button" id="submitbtn" class="btn big mt-35">Войти</button>
+                        <span class="general text-center mt error"></span>
+                    </form>
+
+                    <div class="mt jc">
+                        Нет аккаунта?&nbsp;<a href="/register" id="register_url">Регистрация</a>
+                    </div>
+                </div>
+                <div id="reset_password">
+                    <h2>Сбросить пароль</h2>
+                    <p class="mt-15">Укажите эл. почту или логин, и мы отправим письмо с ссылкой для сброса пароля.
+                    </p>
+                    <form id="reset_form" method="post">
+                        <label for="email_reset" class="mt">Логин или эл. почта</label>
+                        <input type="text" name="email_reset" id="email_reset" autocomplete="username" maxlength="256">
+                        <span class="mt-5 error"></span>
+                        <button type="button" id="resetbtn" class="btn mt" disabled>Сбросить</button>
+                        <a href="javascript:void(0)" class="toggle-reset mt-35 bold">Назад ко входу</a>
+                    </form>
+                </div>
+                <div id="reset-success">
+                    <h2>Проверьте почту</h2>
+                    <p class="mt-15">Письмо с инструкциями по сбросу пароля были отправлены на вашу эл. почту.</p>
+                    <div class="mt">
+                        <a href="javascript:void(0)" class="toggle-reset block bold">Назад ко входу</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock %}

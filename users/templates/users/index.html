@@ -1,0 +1,290 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %}{{ sitename }} – вопросы и ответы для вашего курса.{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">{% endblock %}
+
+{% block content %}
+{% include "users/home_nav.html" %}
+
+<div class="container mtb">
+    <section class="hero">
+        <div class="row sb gap_35">
+            <div>
+                <h1>{{ sitename }}</h1>
+                <h2>обсуждения для вашего курса</h2>
+                <p class="mt med_text sec">Удобная онлайн-платформа для связи студентов и преподавателей.</p>
+                <!-- <p class="mt-15 sec med_text">Весь класс получает пользу от вопросов и ответов.</p> -->
+                <p class="mt-15 sec med_text">Меньше почты и мессенджеров, больше знаний.</p>
+                <div class="alc wrap mt gap">
+                    <a href="/login/" class="btn">Создать обсуждение</a>
+                    <a href="/login/" class="btn">Вступить по коду</a>
+                    <a href="{{democlass}}" class="btn big secondary" target="_blank">Демо</a>
+                </div>
+            </div>
+            <div class="hero_img">
+                <img src="{% static 'img/home/hero.png' %}">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="text-center">Как работает Q&A система</h2>
+        <div class="jc">
+            <div class="mt how_it_works">
+                <div class="alc big_gap">
+                    <div class="text big_text">
+                        Преподаватель создает обсуждение курса и приглашает студентов
+                    </div>
+                    <img src="{% static 'img/home/home_1.svg' %}">
+                </div>
+
+                <div class="alc mt big_gap">
+                    <img src="{% static 'img/home/home_2.svg' %}">
+                    <div class="text big_text">
+                        Студенты задают вопросы
+                    </div>
+                </div>
+
+                <div class="alc mt big_gap">
+                    <div class="text big_text">
+                        Преподаватели и студенты отвечают на вопросы и вовлекаются в обсуждения
+                    </div>
+                    <img src="{% static 'img/home/home_3.svg' %}">
+                </div>
+
+
+                <div class="alc mt big_gap">
+                    <img src="{% static 'img/home/home_4.svg' %}">
+                    <div class="text big_text">
+                        Вопросы и ответы сохраняются и доступны всему классу
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<section class="bg">
+    <div class="container">
+        <h2 class="text-center">Почему вашему курсу нужна Q&A система</h2>
+    </div>
+    <div class="container">
+        <div class="why_us mtb">
+            <div class="jc">
+                <h3>Сейчас</h3>
+            </div>
+            <div class="jc text-center">
+                <h3>После подключения Дискуссии.ру</h3>
+            </div>
+        </div>
+
+        <div class="why_us">
+            <div>
+                <img src="{% static 'img/icons/cross.svg' %}" height="15">
+                <span>Сообщения перемешаны на почте преподавателя.</span>
+            </div>
+            <div>
+                <img src="{% static 'img/icons/mark.svg' %}" height="15">
+                <span>Вопросы разделены по курсам и категориям и разграничены от объявлений.</span>
+            </div>
+        </div>
+
+        <div class="why_us">
+            <div>
+                <img src="{% static 'img/icons/cross.svg' %}" height="15">
+                Преподаватель отвечает на один и тот же вопрос несколько раз.
+            </div>
+            <div><img src="{% static 'img/icons/mark.svg' %}" height="15">Если вопрос был разобран ранее, студент может
+                посмотреть ответ. Не нужно спрашивать еще раз!</div>
+        </div>
+
+        <div class="why_us">
+            <div>
+                <img src="{% static 'img/icons/cross.svg' %}" height="15">Преподаватель не успевает ответить развернуто
+                на каждый вопрос.
+            </div>
+            <div><img src="{% static 'img/icons/mark.svg' %}" height="15">Преподаватель уверен, что не нужно будет
+                заново отвечать на тот же вопрос. Есть время обдумать и подробно оформить ответ.</div>
+        </div>
+
+        <div class="why_us">
+            <div><img src="{% static 'img/icons/cross.svg' %}" height="15">Преподаватель забывает ответить на вопросы на
+                почте.</div>
+            <div><img src="{% static 'img/icons/mark.svg' %}" height="15">Неотвеченные вопросы выделяются из общей
+                массы.</div>
+        </div>
+
+        <div class="why_us">
+            <div><img src="{% static 'img/icons/cross.svg' %}" height="15">Студенты обращаются только к преподавателю
+                своей группы.</div>
+            <div><img src="{% static 'img/icons/mark.svg' %}" height="15">Ответить на вопрос может любой из
+                преподавателей дисциплины, балансируя нагрузку и не
+                допуская того, что студенты обращаются только к некоторым преподавателям.</div>
+        </div>
+
+        <div class="why_us">
+            <div><img src="{% static 'img/icons/cross.svg' %}" height="15">Студенты дискутируют только на занятиях.
+            </div>
+            <div><img src="{% static 'img/icons/mark.svg' %}" height="15">Студенты могут оставлять ответы и комментарии
+                на вопросы однокурсников, что поддерживает взаимодействие за пределами занятий.</div>
+        </div>
+
+        <div class="why_us">
+            <div><img src="{% static 'img/icons/cross.svg' %}" height="15">Некоторые студенты задают вопросы только
+                преподавателям и лишены чувства сплоченности.</div>
+            <div><img src="{% static 'img/icons/mark.svg' %}" height="15">Студенты помогают друг другу и чувствуют, что
+                они не одни.</div>
+        </div>
+    </div>
+</section>
+
+<section class="bg2">
+    <div class="container">
+        <h2 class="text-center">Конструктивная коммуникация внутри курса</h2>
+        <div class="row jc gap_35 mtb communication">
+            <div class="text">
+                <p>Каким бы ни был формат обучения и количество студентов – важно поощрять взаимодействие студентов
+                    внутри курса, сокращая количество электронной почты.</p>
+                <p class="mt">{{ sitename }} предлагает все нужные инструменты для эффективной коммуникации в одном
+                    месте:</p>
+                <ul class="ml mt-15">
+                    <li><span class="bold accent">Q&A</span> – вопросы студентов и ответы на них видны и помогают всем.
+                    </li>
+                    <li class="mt-15"><span class="bold accent">Информация о курсе</span> – размещайте объявления и
+                        ресурсы для студентов.</li>
+                    <li class="mt-15"><span class="bold accent">Редактор</span> со множеством функций для точного оформления вопросов и ответов.</li>
+                </ul>
+            </div>
+            <div class="flex column gap">
+                <img src="{% static 'img/home/question.png' %}" width="400">
+                <img src="{% static 'img/home/answer.png' %}" width="400">
+                <img src="{% static 'img/home/post.png' %}" width="350">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <h2 class="text-center">Инструменты</h2>
+    <div class="mtb row alc jc gap">
+        <div class="instr_text">
+            <h3>Поиск</h3>
+            <div class="mt">Быстрый и точный поиск по обсуждениям.</div>
+        </div>
+        <div class="instr_img alc">
+            <img src="{% static 'img/home/search.png' %}" width="200">
+        </div>
+    </div>
+    <div class="mtb row alc jc gap">
+        <div class="instr_text">
+            <h3>Категории</h3>
+            <div class="mt">Организуйте вопросы по темам.</div>
+        </div>
+        <div class="instr_img alc">
+            <img src="{% static 'img/home/categories.png' %}" width="150">
+        </div>
+    </div>
+</section>
+
+<section class="bg">
+    <div class="container">
+        <h2 class="text-center">Лучшие университеты мира уже используют Q&A системы в своих курсах</h2>
+
+        <div class="jc alc wrap mtb used_by">
+            <a target="_blank" href="https://mitsloanedtech.mit.edu/tools/piazza/" class="alc">
+                <img src="{% static 'img/home/mit.svg' %}">
+            </a>
+            <a target="_blank"
+                href="https://ctl.stanford.edu/teaching-support/use-learning-technology/software-based-solutions/ed-discussion"
+                class="alc">
+                <img src="{% static 'img/home/stanford.svg' %}">
+            </a>
+            <a target="_blank" href="https://atg.fas.harvard.edu/ed-discussion" class="alc">
+                <img src="{% static 'img/home/harvard.svg' %}">
+            </a>
+
+            <a target="_blank" href="https://academictech.uchicago.edu/2024/05/09/making-the-most-of-ed-discussion/"
+                class="alc">
+                <img src="{% static 'img/home/chicago.svg' %}">
+            </a>
+
+            <a target="_blank"
+                href="https://teaching.cornell.edu/learning-technologies/collaboration-tools/discussions/ed-discussion"
+                class="alc">
+                <img src="{% static 'img/home/cornell.svg' %}">
+            </a>
+
+            <a target="_blank" href="https://help.canvas.yale.edu/a/1335094-ed-discussion-overview" class="alc">
+                <img src="{% static 'img/home/yale.svg' %}">
+            </a>
+
+            <a target="_blank" href="https://rtl.berkeley.edu/services-programs/online-discussions" class="alc">
+                <img src="{% static 'img/home/berkley.svg' %}">
+            </a>
+
+            <a target="_blank" href="https://teaching.utoronto.ca/resources/online-discussion-tools/" class="alc">
+                <img src="{% static 'img/home/uoft.svg' %}" class="uoft">
+            </a>
+
+
+            <a target="_blank" href="https://ctei.jhu.edu/tools-and-tech/piazza" class="alc">
+                <img src="{% static 'img/home/jhu.svg' %}">
+            </a>
+
+            <a target="_blank" href="https://infocanvas.upenn.edu/guides/ed-discussion/" class="alc">
+                <img src="{% static 'img/home/upenn.svg' %}">
+            </a>
+
+            <a target="_blank" href="https://teach.caltech.edu/tech-tools/q-and-a_forums_guide" class="alc">
+                <img src="{% static 'img/home/caltech.svg' %}">
+            </a>
+
+            <a target="_blank" href="https://canvas.princeton.edu/asynchronous-discussion-forums" class="alc">
+                <img src="{% static 'img/home/princeton.svg' %}">
+            </a>
+
+
+
+            <!-- https://www.imperial.ac.uk/admin-services/ict/self-service/digital-education-services/digital-education-platforms/ed-discussion/ -->
+        </div>
+        <div class="mtb sec text-center">
+            Нажмите на логотип университета, чтобы перейти к инструкции для преподавателей по использованию Q&A систем
+            на официальном сайте.
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="text-center">Присоединяйтесь к Дискуссии.ру сегодня</h2>
+
+        <div class="mtb jc student_or_teacher">
+            <div data-choice="teacher" class="active">Я преподаватель</div>
+            <div data-choice="student">Я студент</div>
+        </div>
+
+        <div class="mtb jc">
+            <div id="for_teacher" class="text-center">
+                <div class="big_text">Попробуйте Дискуссии.ру бесплатно.</div>
+                <div class="big_text mt-15">Настройка займет всего пару минут.</div>
+                <a href="/register/" class="btn mt big">Создать обсуждение</a>
+            </div>
+            <div id="for_student" class="hide  text-center">
+                <div class="big_text">Предложите своему преподавателю попробовать Дискуссии.ру</div>
+                <button class="mt btn">Скопировать ссылку</button>
+
+                <div class="mt sec">Если ваш курс уже есть на платформе, то <a href="/register/">войдите</a> по коду
+                    курса.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "users/footer.html" %}
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

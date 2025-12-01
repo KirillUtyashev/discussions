@@ -1,0 +1,145 @@
+.cat_bar {
+    --padding: 15px;
+    max-width: 210px;
+    min-width: 210px;
+    border-right: var(--border);
+    padding: 24px var(--padding);
+    height: calc(100vh - var(--nav_height));
+    flex-direction: column;
+    position: fixed;
+    background-color: var(--white);
+    z-index: 100;
+    left: -100%;
+}
+
+.cat_menu_opened {
+    overflow-y: hidden;
+}
+
+.cat_menu_opened .cat_bar {
+    left: 0;
+}
+
+.cat_bar .cat {
+    padding: 10px 15px;
+    margin: 0 -7px;
+    border-radius: var(--radius);
+    color: var(--main) !important;
+}
+
+.cat_square {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    margin-right: 10px;
+}
+
+.course {
+    padding: 8px var(--padding);
+    margin: 0 calc(var(--padding) * -1);
+}
+
+.cat_bar .cat:hover,
+.course:hover {
+    background-color: var(--background2);
+}
+
+.cat_bar .cat.active,
+.course.active {
+    background-color: var(--transp_accent);
+    color: var(--accent);
+}
+
+.cat_bar .subcats {
+    display: none;
+}
+
+.cat_bar .cat.active + .subcats {
+    display: block;
+}
+ 
+.cat_bar .subcat {
+    margin-left: 10px;
+}
+
+.deselect_cat {
+    display: none;
+}
+
+.cat.active .deselect_cat {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.cat.active .deselect_cat::before,
+.cat.active .deselect_cat::after {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 16px;
+    border-radius: 3px;
+    background-color: var(--lightgray);
+    transition: 0.3s;
+}
+
+.cat.active .deselect_cat::before {
+    transform: rotate(45deg);
+}
+
+.cat.active .deselect_cat::after {
+    transform: rotate(-45deg);
+}
+
+.open_cat_menu {
+    width: 20px;
+    height: 20px;
+}
+
+.open_cat_menu span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 500px;
+    background-color: var(--accent);
+}
+
+.open_cat_menu span:nth-child(2) {
+    margin: 3px 0;
+}
+
+.mobile_bar_wrap {
+    padding: 10px 15px;
+    border-bottom: var(--border);
+}
+
+.cat_bar .open_cat_menu {
+    margin-top: -3.5px;
+}
+
+@media (min-width: 1180px) {
+    .cat_bar {
+        position: static;
+    }
+}
+
+#cat_menu_cover {
+    display: none;
+}
+
+.cat_menu_opened #cat_menu_cover {
+    display: block;
+    position: fixed;
+    z-index: 99;
+    top: var(--nav_height);
+    width: 100%;
+    height: calc(100vh - var(--nav_height));
+}
+

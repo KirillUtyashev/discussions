@@ -1,0 +1,35 @@
+.price_box {
+    padding: 24px;
+    border-radius: var(--radius);
+    border: var(--border);
+    display: flex;
+    flex-direction: column;
+    min-width: 230px;
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.plan_name {
+    color: var(--secondary);
+    text-transform: uppercase;
+    font-weight: var(--main_bolder_weight);
+    font-size: 14px;
+    text-align: center;
+}
+
+.price h3 {
+    font-size: 22px;
+}
+
+@media (min-width: 1250px) {
+    .price_box {
+        min-width: calc(20% - 20px);
+        max-width: calc(20% - 20px);
+    }
+}

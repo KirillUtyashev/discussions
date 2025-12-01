@@ -1,0 +1,115 @@
+@import url("components/modal.css");
+
+body {
+    background-color: var(--background);
+}
+
+.content section:not(.active) {
+    display: none;
+}
+
+.settings_menu {
+    padding: 48px 0;
+}
+
+.content {
+    padding: 48px 24px;
+    background-color: var(--white);
+}
+
+.menu_btn {
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: all .3s;
+    margin-bottom: 10px;
+}
+
+.menu_btn:hover {
+    background-color: var(--background2);
+}
+
+.menu_btn.active {
+    color: var(--accent);
+    background-color: var(--transp_accent);
+}
+
+.menu_btn svg path {
+    fill: var(--accent);
+}
+
+/* MAIN */
+
+.content .avatar {
+    width: 55px;
+    height: 55px;
+}
+
+.courses {
+    border-top: var(--border);
+}
+
+.course {
+    padding: 15px 0;
+    border-bottom: var(--border);
+}
+
+.bar {
+    position: relative;
+    background-color: var(--background2);
+    border-radius: 50vh;
+    height: 15px;
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+.bar span {
+    display: inline-block;
+    background-color: var(--accent);
+    height: inherit;
+    position: absolute;
+    width: 0;
+}
+
+.renewal_status *[data-status] {
+    display: none;
+}
+
+.renewal_status[data-status="1"] *[data-status="1"], 
+.renewal_status[data-status="0"] *[data-status="0"]{
+    display: block;
+}
+
+.red_box {
+    border: 2px solid var(--red);
+    border-radius: var(--big_radius);
+    padding: 24px;
+}
+
+
+@media (max-width: 768px) {
+    .menu_btn .text {
+        display: none;
+    }
+
+    .main.container {
+        padding: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .menu_btn {
+        border-radius: var(--radius);
+    }
+    .settings_menu {
+        width: 100%;
+        max-width: 250px;
+        padding-top: 48px;
+        padding-right: 32px;
+    }
+    .course {
+        padding: 15px;
+    }
+    .content {
+        padding: 48px 32px;
+    }
+}

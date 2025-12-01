@@ -1,0 +1,7 @@
+{% extends "users/email.html" %}
+
+{% block title %} Успешное оформление подписки {% endblock %}
+{% block header %} Подписка успешно оформлена {% endblock %}
+{% block text %}{{ message }}{% endblock %}
+{% block button_text %}Управлять подпиской{% endblock %}
+{% block link %}https://discussions.ru/settings/?tab=payment{% endblock %}

@@ -1,0 +1,52 @@
+{% load static %}
+<nav class="home_nav">
+    <div class="nav_inner container alc w-100 sb">
+        <div class="alc gap_35">
+            <div>
+                {% include "users/components/logo.html" %}
+            </div>
+
+            <div class="desk alc gap_35">
+                <!-- <a href="/about/" class="main">О продукте</a> -->
+                <a href="/pricing/" class="main">Цены</a>
+                <a href="/universities/" class="main">Для ВУЗов</a>
+                <a href="/contact/" class="main">Связаться</a>
+            </div>
+        </div>
+        <div class="mobile">
+            <div class="pointer alc column jc color" id="menu_icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="desk">
+            <div class="flex gap">
+                <a href="/login/" class="btn big">
+                    {% if user.is_authenticated %}
+                        Личный кабинет
+                    {% else %}
+                        Войти
+                    {% endif %}</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div id="full_menu" class="w-100">
+
+
+
+    <a href="/login/" class="alc mt bt mob_nav_link">
+        {% if user.is_authenticated %}
+            Личный кабинет
+        {% else %}
+            Войти
+        {% endif %}</a>
+    <!-- <a href="/about/" class="alc mob_nav_link">О продукте</a> -->
+    <a href="/pricing/" class="alc mob_nav_link">Цены</a>
+    <a href="/universities/" class="alc mob_nav_link">Для ВУЗов</a>
+    <a href="/contact/" class="alc mob_nav_link">Связатья</a>
+
+</div>

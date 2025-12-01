@@ -1,0 +1,20 @@
+<div class="modal" id="search_modal">
+    <div class="modal-content">
+        <div class="alc modal_search_bar gap_15">
+            {% include "discussionboard/components/icons/../icons/search.html" %}
+            <input type="text" id="search_field_2">
+        </div>
+        <div class="search_container">
+            <div id="looking">
+                Ищем...
+            </div>
+            <div id="search_results" hidden>
+                <h3>Результаты</h3>
+                <div id="search_list"></div>
+                <div class="mt accent jc pointer" id="search_load_more">Показать еще</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "discussionboard/components/search/result_template.html" %}

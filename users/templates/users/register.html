@@ -1,0 +1,57 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% block title %}Регистрация | Дилемма{% endblock %}
+{% block styles %}<link rel="stylesheet" href="{% static 'css/login.css' %}">{% endblock %}
+
+{% block content %}
+
+<div class="container height_100 register">
+    <div class="row jc big_gap reg_wrapper">
+        <div class="side desk">
+            <div class="login_logo">
+                {% include "users/components/logo.html" %}
+            </div>
+            <p>Удобная платформа для связи преподавателей и студентов.</p>
+            <h2 class="mt">Для студентов</h2>
+            <p class="mt-15">Вступите в обсуждение своего курса, чтобы задавать вопросы. Ответят ваши сокурсники или преподаватели.</p>
+            <h2 class="mt">Для преподавателей</h2>
+            <p class="mt-15">Создайте обсуждение для своего курса и пригласите студентов. Весь класс получит пользу от вопросов и ответов.</p>
+        </div>
+
+        <div class="main_column">
+            <div class="mobile login_logo">
+                {% include "users/components/logo.html" %}
+            </div>
+            <div class="form_cont">
+                <h1>Регистрация</h1>
+                <form id="signup_form" method="post"> {% csrf_token %}
+                    <label for="name" class="mt">Имя</label>
+                    <input type="text" name="name" id="name" autocomplete="username" maxlength="256">
+                    <span class="error mt-5"></span>
+
+                    <label for="email"  class="mt">Логин или эл. почта</label>
+                    <input type="text" name="email" id="email" autocomplete="username" maxlength="256">
+                    <span class="error mt-5"></span>
+
+
+                    <label for="password"  class="mt">Пароль</label>
+                    <input type="password" name="password" id="password" autocomplete="current-password" maxlength="256">
+                    <span class="error mt-5"></span>
+
+                    <button type="button" id="submitbtn" class="btn big mt">Создать аккаунт</button>
+                    <span class="general mt-15 error"></span>
+
+                    <div class="mt jc">
+                        Уже есть аккаунт?&nbsp;<a href="/login">Войти</a>
+                    </div>
+                    <!-- <a href="/register<?php echo $returnurl; ?>" class="bold text-center mt-15">Нет аккаунта? Зарегистрируйтесь</a> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/register.js' %}"></script>
+{% endblock %}

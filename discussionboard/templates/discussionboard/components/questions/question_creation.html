@@ -1,0 +1,49 @@
+<section class="thread_creation">
+
+    <div class="mobile mb">
+        <div class="alc">
+            <div class="pointer back_to_threads sec">Назад</div>
+        </div>
+    </div>
+
+    <div class="alc type_options instructor_only">
+        <div data-type="question" class="pointer active">Вопрос</div>
+        <div data-type="post" class="pointer">Объявление</div>
+    </div>
+
+    <div class="mt alc gap">
+        <label class="sec">Название</label>
+        <div class="w-100">
+            <input type="text" id="q_title">
+            <div class="red mt hide" id="title_error">Пожалуйста, заполните поле названия.</div>
+        </div>
+    </div>
+
+    <div class="mt alc gap">
+        <label class="sec">Рубрика</label>
+        <div class="alc select_cat wrap small_gap">
+            {% for category in categories %}
+            <div class="cat top_cat pointer" data-id="{{ category.id }}">{{ category.tag }}</div>
+            <div class="creation_subcats small_gap">
+                {% for subcategory in category.subcategories.all %}
+                <div class="cat subcat pointer" data-id="{{ subcategory.id }}" data-top-id="{{ category.id }}">
+                    <span>{{ subcategory.tag }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="mtb">
+        <textarea id="question_body_form"></textarea>
+        <div class="red mt hide" id="body_error">Текст слишком короткий.</div>
+    </div>
+
+    {% include "discussionboard/components/anonymous.html" %}
+
+    <div class="mtb sb alc">
+        <div class="pointer mb back_to_threads sec">Отменить</div>
+        <button class="mb btn" id="publish">Опубликовать</button>
+    </div>
+</section>
